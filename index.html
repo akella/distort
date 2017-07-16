@@ -12,20 +12,22 @@
 				document.querySelector('body').addEventListener('click', function(){
 					var tl = new TimelineMax﻿();
 					tl
-						.to(displacementFilter.scale, 1, {y:20,x: 20})
-					// 	.to(displacementFilter.scale, 1, {y:0.1,x:0.1});
-					// tl
-					// 	.to(img2, 1, {alpha: 1},1)
-					// tl
-					// 	.fromTo(img2.scale, 1, 
-					// 		{y:img2.scale.y*2},
-					// 		{y:img2.scale.y},1)
+						.to(displacementFilter.scale, 1, {y:600,x: 0.1})
+						.to(displacementFilter.scale, 1, {y:0.1,x:0.1});
+					tl
+						.to(img2, 1, {alpha: 1},1)
+					tl
+						.fromTo(img2.scale, 1, 
+							{y:img2.scale.y*2},
+							{y:img2.scale.y},1)
 				});
 			  	
 
 			  		// PIXI INIT STAGE
 			  		var renderer = new PIXI.autoDetectRenderer(800, 600, {backgroundColor : 0x000000});
-			  		document.body.appendChild(renderer.view);
+			  		document.getElementById("pixi").appendChild(renderer.view);
+
+
 
 			  		var stage = new PIXI.Stage();
 			  		var container = new PIXI.DisplayObjectContainer();
@@ -33,7 +35,7 @@
 
 
 			  		// render image
-			  		var img1 = PIXI.Sprite.fromImage('2.jpg');
+			  		var img1 = PIXI.Sprite.fromImage('1.jpg');
 			  		img1.width = 650;
 			  		img1.height = 500;
 			  		img1.position.x = 75;
@@ -41,20 +43,20 @@
 			  		container.addChild(img1);
 
 
-			  		// render image
-			  		// var img2 = PIXI.Sprite.fromImage('2.jpg');
-			  		// img2.width = 650;
-			  		// img2.height = 500;
-			  		// img2.position.x = 75;
-			  		// img2.position.y = 50;
-			  		// img2.alpha = 0;
-			  		// container.addChild(img2);
+			  		// render second image
+			  		var img2 = PIXI.Sprite.fromImage('2.jpg');
+			  		img2.width = 650;
+			  		img2.height = 500;
+			  		img2.position.x = 75;
+			  		img2.position.y = 50;
+			  		img2.alpha = 0;
+			  		container.addChild(img2);
 
 
 
 
 			  		// add Filters
-			  		var disSprite = PIXI.Sprite.fromImage('noise.png');
+			  		var disSprite = PIXI.Sprite.fromImage('map.jpg');
 
 			  		disSprite.width = renderer.width*1.5;
 			  		disSprite.height = renderer.height * 1.5;
@@ -81,11 +83,10 @@
 	</script>
 </head>
 <body > 
-<!-- <img src="1.jpg" alt="">
-<img src="2.jpg" alt=""> -->
+<h1>Click anywhere to run</h1>
+<div id="pixi"></div>
 
-
-<!-- <svg width="800" height="600" viewBox="0 0 800 600"
+ <svg width="800" height="600" viewBox="0 0 800 600"
      xmlns="http://www.w3.org/2000/svg">
  
 
@@ -96,6 +97,7 @@
   	  <feDisplacementMap in2="turbulence" in="SourceGraphic"
   	      scale="50" xChannelSelector="R" yChannelSelector="G"/>
   	</filter>
+  	<!-- TRY THIS ONE! -->
   	<filter id="displacement" filterUnits="objectBoundingBox">
   	        <feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2"  result="turb"/>
   	          <feColorMatrix in="turb" result="huedturb" type="hueRotate" values="90">     
@@ -107,7 +109,7 @@
   </defs>
 
   <image href="1.jpg"
-      style="filter: url(#displacement)"/>
-</svg> -->
+      style="filter: url(#displacementFilter)"/>
+</svg> 
 </body>
 </html>

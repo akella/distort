@@ -5,7 +5,7 @@
 	<title>Super-duper animations</title>
 </head>
 <body>
-
+<h1>Click anywhere to start</h1>
 
 
 
@@ -20,8 +20,10 @@
 
 	img.src = '2.jpg';
 	mask.src = 'nature-sprite.png';
-
-
+	img.onload = function(){
+		ctx.drawImage(img,0,0,800,600);
+	}
+	
 	var i = 0;
 	function draw(){
 		i++;
@@ -34,7 +36,13 @@
 		// window.requestAnimationFrame(draw);
 		setTimeout(draw,100);
 	}
-	draw();
+
+
+
+	document.querySelector('body').addEventListener('click',function(){
+		draw();
+		document.querySelector('body').className = 'start-animation';
+	})
 </script>
 
 
@@ -84,7 +92,7 @@
 		top: 0;
 		left: 0;
 	}
-	.img_2.hide{
+	.start-animation .img_2{
 		-webkit-mask: url(nature-sprite.png);
 		mask: url(nature-sprite.png);
 		-webkit-mask-size: 2300% 100%;
